@@ -13,4 +13,4 @@ app.post('/signin',(req,res) => {
     const {name} = req.body;
     res.json(`Content received in ${name}`)
 })
-app.listen(3000, ()=> console.log(`server is running on port 3000`))
+app.listen(PORT || 3000, ()=> console.log(`server is running on port ${PORT}`))
