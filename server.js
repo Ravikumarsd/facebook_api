@@ -9,8 +9,9 @@ const app = express()
 
 app.get('/',(req,res) => res.json("Backend is working properly"))
 
-app.post('/signin',(req,res) => {
-    const {name} = req.body;
-    res.json(`Content received is: ${name}`)
+
+app.post('/home',(req,res)=>{
+    const {home} = req.body;
+    res.json(` ${home} end point is working fine:{`)
 })
 app.listen(PORT || 3000, ()=> console.log(`server is running on port ${PORT}`))
