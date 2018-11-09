@@ -6,7 +6,7 @@ const express = require('express'),
       request = require('request'),
       app = express().use(bodyParser.json()).use(cors()),
       PORT = process.env.PORT,
-      PAGE_ACCESS_TOKEN = "EAAHp9ZATUmfsBACup51Q2CZA78hekxGtjyNaugSb6uV3N4Al8kF70ZBLWR9nPpP2b0WI1GXBZA9s2tfyjZBtj91cGQkBSMlkkyPlVK4bIE3eoacCvTunBYZCfjC4ZC0ZBYrmDVGGI3JpWJEIcckEORJPnpMVdosBbRqZBcEOHELtdC8CrVEcl9qwPlWmCVJ7dqQdfwoXKhFEyagZDZD"
+      PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 app.get('/', (req, res) => res.json("Backend is working properly"))
 
