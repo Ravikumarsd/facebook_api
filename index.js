@@ -78,10 +78,9 @@ app.get('/webhook', (req, res) => {
 
 })
 
-app.listen(PORT || 3000, () => console.log(`server is running on port ${PORT}`))
 
 //Handles messages events 
-handleMessage = (sender_psid, received_message) => {
+ const handleMessage = (sender_psid, received_message) =>{
       let response;
 
       if(received_message.text) {
@@ -93,14 +92,14 @@ handleMessage = (sender_psid, received_message) => {
 }
 
 
-// Handles messaging_postbacks events
-handlePostback = (sender_psid, received_postback) => {
+// // Handles messaging_postbacks events
+// handlePostback = (sender_psid, received_postback) => {
 
-}
+// }
 
 
 // Sends response messages via the Send API
-callSendAPI = (sender_psid, response) => {
+const callSendAPI=(sender_psid, response) => {
       //Construct the message body
       let request_body = {
             "recipient": {
@@ -122,3 +121,6 @@ callSendAPI = (sender_psid, response) => {
       }
     }); 
   }
+
+app.listen(PORT || 3000, () => console.log(`server is running on port ${PORT}`))
+
