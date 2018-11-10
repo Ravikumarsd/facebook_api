@@ -7,6 +7,8 @@ const express = require('express'),
       app = express().use(bodyParser.json()).use(cors()),
       PORT = process.env.PORT,
       PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+      PAGE_ACCESS_TOKEN2 = process.env.PAGE_ACCESS_TOKEN2;
+
 
 app.get('/', (req, res) => res.json("Backend is working properly"))
 
@@ -110,7 +112,7 @@ const callSendAPI=(sender_psid, response) => {
       // Send the HTTP request to the Messenger Platform
   request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "qs": { "access_token": PAGE_ACCESS_TOKEN || PAGE_ACCESS_TOKEN2},
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
