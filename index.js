@@ -6,7 +6,7 @@ const express = require('express'),
       request = require('request'),
       app = express().use(bodyParser.json()).use(cors()),
       PORT = process.env.PORT,
-      PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+      PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN,
       PAGE_ACCESS_TOKEN2 = process.env.PAGE_ACCESS_TOKEN2;
 
 
@@ -125,4 +125,3 @@ const callSendAPI=(sender_psid, response) => {
   }
 
 app.listen(PORT || 3000, () => console.log(`server is running on port ${PORT}`))
-
