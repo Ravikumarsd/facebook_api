@@ -68,7 +68,8 @@ app.get('/webhook', (req, res) => {
                   "text": `You sent the message: "${received_message.text}". Now send me an image!`
             }
       }
-      callSendAPI(sender_psid, response);
+      arr.map(token=>
+      callSendAPI(sender_psid, response,token))
 }
 
 
@@ -77,9 +78,8 @@ const handlePostback = (sender_psid, received_postback) => {
 
 }
 
-
 // Sends response messages via the Send API
-const callSendAPI=(sender_psid, response) => {
+const callSendAPI=(sender_psid, response,token) => {
       //Construct the message body
       let request_body = {
             "recipient": {
@@ -88,23 +88,9 @@ const callSendAPI=(sender_psid, response) => {
             "message":response
       }
       // Send the HTTP request to the Messenger Platform
-//   request({
-//       "uri": "https://graph.facebook.com/v2.6/me/messages",
-//       "qs": { "access_token": PAGE_ACCESS_TOKEN2},
-//       "method": "POST",
-//       "json": request_body
-//     }, (err, res, body) => {
-//       if (!err) {
-//         console.log('message sent!')
-//       } else {
-//         console.error("Unable to send message:" + err);
-//       }
-//     });
-
-
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": arr.map(elem => elem)},
+      "qs": { "access_token": token},
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
