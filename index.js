@@ -36,7 +36,6 @@ app.post('/webhook', (req, res) => {
       }
 })
 
-
 app.get('/webhook', (req, res) => {
       let VERIFY_TOKEN = "chatbot"
       let mode = req.query['hub.mode']
@@ -121,7 +120,20 @@ const callSendAPI=(sender_psid, response) => {
       } else {
         console.error("Unable to send message:" + err);
       }
+    });
+    request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token": PAGE_ACCESS_TOKEN},
+      "method": "POST",
+      "json": request_body
+    }, (err, res, body) => {
+      if (!err) {
+        console.log('message sent!')
+      } else {
+        console.error("Unable to send message:" + err);
+      }
     }); 
-  }
+}
+
 
 app.listen(PORT || 3000, () => console.log(`server is running on port ${PORT}`))
