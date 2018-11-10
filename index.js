@@ -6,8 +6,7 @@ const express = require('express'),
       request = require('request'),
       app = express().use(bodyParser.json()).use(cors()),
       PORT = process.env.PORT,
-      PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN,
-      PAGE_ACCESS_TOKEN2 = process.env.PAGE_ACCESS_TOKEN2;
+      PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN2;
 
 
 app.get('/', (req, res) => res.json("Backend is working properly"))
