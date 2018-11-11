@@ -1,19 +1,20 @@
 'use strict'
-
 const express = require('express'),
       bodyParser = require('body-parser'),
       cors = require('cors'),
       request = require('request'),
       app = express().use(bodyParser.json()).use(cors()),
-      PORT = process.env.PORT,
-      PAGE_ACCESS_TOKEN = "EAAHp9ZATUmfsBALvFzHYUwqwecJdZB6ZCzlIQt1qJdHanDp5urqJekj2rfHYZBUex0BN66LmgZBUtIpk5fZCs43mDdtCeIOwCTO7zrypiDxoLnZBaTJQtMq71il6vtdFnhqNCuZAQZAX811ZCdYIDn8ZBOfsgjlEiYhfPcKqYZCvAZCMyfN1qziaOveW7MoBjQCTvZB704hkBhE5OZC3gZDZD",
-      PAGE_ACCESS_TOKEN2 = "EAAHp9ZATUmfsBABOHoZAXqlSCoDwIABvB0m7zvaZCMzq3M0X6Je3sMiOWeXvEKrJ6z5M6dVSN1Km2c29fPXeBcYiarDbXvlZClqq8jXj6ETYwiXyd0GpeyopzkKcXbmY1zgiCZAPvNhSGRfE8ReCnBO36LhHbNDZCBfvPgFkYjKvjRoO5ctHdvJMF7d4sBjfG0kt9OwKgrlwZDZD";
+      PORT = process.env.PORT;
 
-      const arr = [];
-            arr.push(PAGE_ACCESS_TOKEN);
-            arr.push(PAGE_ACCESS_TOKEN2);
+      let ar = [];
+app.post('/access_token', (req,res) => {
 
-            console.log(arr.map(elem => elem))
+      let access_tokens = req.body.access_token;
+      res.json("OK");
+      access_tokens.map(at => ar.push(at))
+      console.log(ar.length)
+})
+
 
 app.get('/', (req, res) => res.json("Backend is working properly"))
 
@@ -21,6 +22,7 @@ app.post('/webhook', (req, res) => {
       let body = req.body;
       if (body.object === 'page') {
             body.entry.forEach(entry => {
+
                   // Gets the body of the webhook event
                   let webhook_event = entry.messaging[0]
                   console.log(webhook_event)
@@ -49,7 +51,6 @@ app.get('/webhook', (req, res) => {
 
       if (mode && token) {
             if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-
                   console.log('WEBHOOK_VERIFIED');
                   res.status(200).send(challenge);
             } else {
@@ -68,8 +69,9 @@ app.get('/webhook', (req, res) => {
                   "text": `You sent the message: "${received_message.text}". Now send me an image!`
             }
       }
-      arr.map(token=>
-      callSendAPI(sender_psid, response,token))
+
+      ar.map(at=>
+            callSendAPI(sender_psid, response,at))
 }
 
 
@@ -79,7 +81,7 @@ const handlePostback = (sender_psid, received_postback) => {
 }
 
 // Sends response messages via the Send API
-const callSendAPI=(sender_psid, response,token) => {
+const callSendAPI=(sender_psid, response,access_token) => {
       //Construct the message body
       let request_body = {
             "recipient": {
@@ -89,8 +91,8 @@ const callSendAPI=(sender_psid, response,token) => {
       }
       // Send the HTTP request to the Messenger Platform
     request({
-      "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": token},
+      "uri": "https://graph.facebook.com/v3.2/me/messages",
+      "qs": { "access_token": access_token},
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
@@ -102,5 +104,4 @@ const callSendAPI=(sender_psid, response,token) => {
     });
 }
 
-
-app.listen(PORT || 3000, () => console.log(`server is running on port ${PORT}`))
+app.listen(PORT||3000, () => console.log(`server is running on port ${PORT}`))
