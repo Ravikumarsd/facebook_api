@@ -7,8 +7,8 @@ const express = require('express'),
       PORT = process.env.PORT;
 
       let ar = [];
+      
 app.post('/access_token', (req,res) => {
-
       let access_tokens = req.body.access_token;
       res.json("OK");
       access_tokens.map(at => ar.push(at))
