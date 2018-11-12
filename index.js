@@ -11,11 +11,7 @@ const express = require('express'),
 app.post('/access_token', (req,res) => {
       let access_tokens = req.body.access_token;
       ar=[...access_tokens]
-      res.json(`
-      ${ar[0]}
-      ${ar[1]}
-      ${ar[2]}
-      ${ar[3]}`)
+      res.json("received access_tokens");
 })
 
 
