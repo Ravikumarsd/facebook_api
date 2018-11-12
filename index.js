@@ -10,7 +10,7 @@ const express = require('express'),
       
 app.post('/access_token', (req,res) => {
       let access_tokens = req.body.access_token;
-      access_tokens.map(at => ar.push(at))
+      ar=[...access_tokens]
       res.json(`
       ${ar[0]}
       ${ar[1]}
