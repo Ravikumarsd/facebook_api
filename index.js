@@ -10,9 +10,8 @@ const express = require('express'),
       
 app.post('/access_token', (req,res) => {
       let access_tokens = req.body.access_token;
-      res.json("OK");
       access_tokens.map(at => ar.push(at))
-      console.log(ar.length)
+      response.json(`${ar.length}`);
 })
 
 
